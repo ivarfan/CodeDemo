@@ -1,2 +1,2 @@
 # CodeDemo
-Code Snippets
+For demostrating the codes I have written.
