@@ -1,4 +1,5 @@
 /*Error Messages*/
+
 #define BIG_SET_ERR_MSG                                                        \
     "ERROR: Number of set index bits needs to be less than 64.\n"
 #define NEG_SET_ERR_MSG                                                        \
@@ -55,6 +56,8 @@ unsigned long valid_bit_mask(unsigned long bound_left,
 void move_line_forward(cache_set *cur_cache_block, 
                        cache_line *new_head_line);
 
+
+/*Function Implementations*/
 
 /**
  * @brief Processing the operation of a line in the trace file and update on the
