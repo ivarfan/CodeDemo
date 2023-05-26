@@ -1,3 +1,61 @@
+/*Error Messages*/
+#define BIG_SET_ERR_MSG                                                        \
+    "ERROR: Number of set index bits needs to be less than 64.\n"
+#define NEG_SET_ERR_MSG                                                        \
+    "ERROR: Number of set index bits needs to be non-negative.\n"
+#define BIG_BLK_ERR_MSG                                                        \
+    "ERROR: Number of block bits needs to be less than 64.\n"
+#define NEG_BLK_ERR_MSG                                                        \
+    "ERROR: Number of block bits needs to be non-negative.\n"
+#define NEG_LIN_ERR_MSG "ERROR: Number of lines per set needs to be positive.\n"
+#define BIG_SET_BLK_ERR_MSG                                                    \
+    "ERROR: The total number of set index bits and block bits needs to be "    \
+    "less than or equal to 64.\n"
+#define INC_ARG_ERR_MSG                                                        \
+    "ERROR: Number of set index bits, block bits, lines or trace file was "    \
+    "not provided.\n"
+#define FIL_ERR_MSG "ERROR: Invalid tracing file provided.\n"
+
+
+/*Structs*/
+
+/*individual cache line*/
+typedef struct CacheLine {
+    int dirty_bit;
+    unsigned long tag_val;
+    struct CacheLine *next_line;
+    struct CacheLine *prev_line;
+} cache_line;
+
+/*individual cache set*/
+typedef struct CacheSet {
+    unsigned long empty_lines;
+    int empty_flag;
+    cache_line *first_line;
+    cache_line *last_line;
+} cache_set;
+
+
+/*Function Prototypes*/
+
+/** @brief Processing the operation of a line in the trace file and update on
+ * the cache reading statistics.*/
+void process_op(char op, unsigned long tag, cache_set *cur_cache_block,
+                cache_op_tally *op_tally);
+
+/** @brief To go over a trace file and simulate the cache operations with it.*/
+int process_trace_file(arg_cache_spec *cache_spec, cache_set *main_cache,
+                       cache_op_tally *op_tally);
+
+/** @brief Create the mask for slicing specific bits.*/
+unsigned long valid_bit_mask(unsigned long bound_left,
+                             unsigned long bound_right);
+
+/** @brief moving a line to the front of a cache set.*/
+void move_line_forward(cache_set *cur_cache_block, 
+                       cache_line *new_head_line);
+
+
 /**
  * @brief Processing the operation of a line in the trace file and update on the
  * cache reading statistics
