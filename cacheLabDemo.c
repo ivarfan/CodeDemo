@@ -66,7 +66,6 @@ void move_line_forward(cache_set *cur_cache_block,
  * @param op_tally The overall statistics on the cache reading
  *
  */
-
 void process_op(char op, unsigned long tag, cache_set *cur_cache_block,
                 cache_op_tally *op_tally) {
     /*first line to put in the current cache set*/
@@ -113,7 +112,6 @@ void process_op(char op, unsigned long tag, cache_set *cur_cache_block,
  * @return The result of the reading with 1 indicating the reading has failed,
  * i.e. bad trace file and 0 indicating success
  */
-
 int process_trace_file(arg_cache_spec *cache_spec, cache_set *main_cache,
                        cache_op_tally *op_tally) {
 
@@ -234,7 +232,6 @@ int process_trace_file(arg_cache_spec *cache_spec, cache_set *main_cache,
  *
  * @return The bit-wise mask of the bits that will be valid
  */
-
 unsigned long valid_bit_mask(unsigned long bound_left,
                              unsigned long bound_right) {
     unsigned long left_mask;
@@ -259,7 +256,6 @@ unsigned long valid_bit_mask(unsigned long bound_left,
  * @param new_head_line The line that is to become the new line head
  *
  */
-
 void move_line_forward(cache_set *cur_cache_block, cache_line *new_head_line) {
     if (cur_cache_block->first_line !=
         new_head_line) { // no neede to move if the line is already a first line
